@@ -1,3 +1,6 @@
 mongo:
   name: "timesheet"
   url: "mongodb://localhost:27017/"
+server:
+  servlet:
+    context-path: "/timesheet"

@@ -1,25 +1,28 @@
 package com.olfourd.timesheet.dao.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-/**
- * Проект
- */
+import javax.validation.constraints.NotBlank;
+
+
+@ApiModel(description = "Проект")
 @Data
 @RequiredArgsConstructor(staticName = "of")
+@NoArgsConstructor
 public class Project {
 
-    /**
-     * Идентификатор
-     */
     @Id
+    @ApiModelProperty(notes = "Идентификатор")
     private String id;
-    /**
-     * Наименование
-     */
+
+    @ApiModelProperty(notes = "Наименование проекта", required = true)
     @NonNull
+    @NotBlank(message = "Project name is mandatory")
     private String name;
 }
