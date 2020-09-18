@@ -65,7 +65,7 @@ public class TrackController {
     }
 
     @ApiOperation("Delete track")
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping("/{id}")
     @ResponseBody
     public void deleteTrack(@NotBlank @PathVariable("id") String id) {
         Track track = trackRepository.findById(id)

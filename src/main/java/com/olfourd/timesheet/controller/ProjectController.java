@@ -5,12 +5,14 @@ import com.olfourd.timesheet.dao.model.Project;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-//todo: controller test
 @ApiModel("Project api")
 @RestController
 @RequestMapping("project")
@@ -22,6 +24,7 @@ public class ProjectController {
     @ApiOperation("Add new project")
     @PostMapping
     @ResponseBody
+    @ResponseStatus(HttpStatus.CREATED)
     public Project createProject(@Valid @RequestBody Project project) {
         return projectRepository.insert(project);
     }
@@ -29,7 +32,12 @@ public class ProjectController {
     @ApiOperation("Update project")
     @PutMapping
     @ResponseBody
-    public Project updateProject(@Valid @RequestBody Project project) {
+    public Project updateProject(@Valid @RequestBody Project request) {
+        Project project = projectRepository.findById(request.getId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found by ID: " + request.getId()));
+
+        project.setName(request.getName());
+
         return projectRepository.save(project);
     }
 
@@ -41,10 +49,12 @@ public class ProjectController {
     }
 
     @ApiOperation("Delete project")
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseBody
-    //todo by id
-    public void deleteProject(@Valid @RequestBody Project project) {
+    public void deleteProject(@NotBlank @PathVariable("id") String id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found by ID: " + id));
+
         projectRepository.delete(project);
     }
 }
