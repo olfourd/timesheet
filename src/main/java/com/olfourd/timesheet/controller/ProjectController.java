@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-
+//todo: controller test
 @ApiModel("Project api")
-@RestController("/project")
+@RestController
+@RequestMapping("project")
 @RequiredArgsConstructor
 public class ProjectController {
 
@@ -42,6 +43,7 @@ public class ProjectController {
     @ApiOperation("Delete project")
     @DeleteMapping
     @ResponseBody
+    //todo by id
     public void deleteProject(@Valid @RequestBody Project project) {
         projectRepository.delete(project);
     }

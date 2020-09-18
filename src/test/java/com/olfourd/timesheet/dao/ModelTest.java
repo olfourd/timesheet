@@ -1,4 +1,4 @@
-package com.olfourd.timesheet;
+package com.olfourd.timesheet.dao;
 
 import com.olfourd.timesheet.dao.AssigneeRepository;
 import com.olfourd.timesheet.dao.ProjectRepository;

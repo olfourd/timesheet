@@ -1,41 +1,37 @@
 package com.olfourd.timesheet.dao.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
+@ApiModel(description = "Трекинг")
 @Data
 @Builder
 public class Track {
 
-    /**
-     * Идентификатор
-     */
+    @ApiModelProperty(notes = "Идентификатор")
     @Id
     private String id;
-    /**
-     * Время трекинга
-     */
+
+    @ApiModelProperty(notes = "Провект")
+    private Project project;
+
+    @ApiModelProperty("Время трекинга")
     private TrackTime trackTime;
-    /**
-     * Описание работ
-     */
+
+    @ApiModelProperty("Описание работ")
     private String description;
 
-    /**
-     * Время трекинга
-     */
+    @ApiModel(description = "Время трекинга")
     @Data
     @AllArgsConstructor(staticName = "of")
     public static class TrackTime {
-        /**
-         * Статр трекинга
-         */
+        @ApiModelProperty("Стапт трекинга")
         LocalDateTime start;
-        /**
-         * Окончание трекинга
-         */
+        @ApiModelProperty("Окончание трекинга")
         LocalDateTime end;
     }
 }
