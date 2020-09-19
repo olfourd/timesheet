@@ -54,8 +54,7 @@ public class TrackController {
     @PutMapping
     @ResponseBody
     public Track updateTrack(@Valid @RequestBody Track request) {
-        Track track = trackRepository.findById(request.getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Track not found by ID: " + request.getId()));
+        Track track = trackRepository.findByIdMandatory(request.getId());
 
         track.setProject(request.getProject());
         track.setTrackTime(request.getTrackTime());
@@ -68,9 +67,7 @@ public class TrackController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public void deleteTrack(@NotBlank @PathVariable("id") String id) {
-        Track track = trackRepository.findById(id)
-                //todo: create Exception + advice
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Track not found by ID: " + id));
+        Track track = trackRepository.findByIdMandatory(id);
         trackRepository.delete(track);
     }
 

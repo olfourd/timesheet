@@ -6,6 +6,7 @@ import com.olfourd.timesheet.dao.ProjectRepository;
 import com.olfourd.timesheet.dao.TrackRepository;
 import com.olfourd.timesheet.dao.model.Project;
 import com.olfourd.timesheet.dao.model.Track;
+import com.olfourd.timesheet.exception.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -78,7 +79,7 @@ public class TrackControllerTest {
     void shouldUpdateTrack() throws Exception {
         Track track = Track.builder().id("unique Id").build();
 
-        given(trackRepository.findById(track.getId())).willReturn(Optional.of(track));
+        given(trackRepository.findByIdMandatory(track.getId())).willReturn(track);
         given(trackRepository.save(any(Track.class))).willAnswer((invocation) -> invocation.getArgument(0));
 
         this.mockMvc.perform(put("/track")
@@ -91,7 +92,7 @@ public class TrackControllerTest {
     @Test
     void shouldReturn404WhenUpdateNonExistingTrack() throws Exception {
         Track track = Track.builder().id("unique Id").build();
-        given(trackRepository.findById(track.getId())).willReturn(Optional.empty());
+        given(trackRepository.findByIdMandatory(anyString())).willThrow(EntityNotFoundException.class);
 
         this.mockMvc.perform(put("/track")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -101,10 +102,9 @@ public class TrackControllerTest {
 
     @Test
     void shouldReturn404WhenDeletingNonExistingTrack() throws Exception {
-        String trackId = "id";
-        given(trackRepository.findById(trackId)).willReturn(Optional.empty());
+        given(trackRepository.findByIdMandatory(anyString())).willThrow(EntityNotFoundException.class);
 
-        this.mockMvc.perform(delete("/track/${id}", trackId))
+        this.mockMvc.perform(delete("/track/{id}", "id"))
                 .andExpect(status().isNotFound());
     }
 

@@ -75,7 +75,7 @@ public class ProjectControllerTest {
         Project requestProject = new Project(id, "new name");
         Project savedProject = new Project(id, "name");
 
-        given(projectRepository.findById(anyString())).willReturn(Optional.of(savedProject));
+        given(projectRepository.findByIdMandatory(anyString())).willReturn(savedProject);
         given(projectRepository.save(any(Project.class))).willAnswer((invocation) -> invocation.getArgument(0));
 
         this.mockMvc.perform(put(PROJECT_CONTROLLER_PATH)

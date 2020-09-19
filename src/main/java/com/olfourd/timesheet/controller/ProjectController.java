@@ -33,11 +33,8 @@ public class ProjectController {
     @PutMapping
     @ResponseBody
     public Project updateProject(@Valid @RequestBody Project request) {
-        Project project = projectRepository.findById(request.getId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found by ID: " + request.getId()));
-
+        Project project = projectRepository.findByIdMandatory(request.getId());
         project.setName(request.getName());
-
         return projectRepository.save(project);
     }
 
@@ -52,9 +49,7 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     @ResponseBody
     public void deleteProject(@NotBlank @PathVariable("id") String id) {
-        Project project = projectRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Project not found by ID: " + id));
-
+        Project project = projectRepository.findByIdMandatory(id);
         projectRepository.delete(project);
     }
 }
