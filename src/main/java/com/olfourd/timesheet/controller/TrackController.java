@@ -1,6 +1,6 @@
 package com.olfourd.timesheet.controller;
 
-import com.olfourd.timesheet.controller.dto.AddTrackRequest;
+import com.olfourd.timesheet.controller.dto.track.AddTrackRequest;
 import com.olfourd.timesheet.dao.ProjectRepository;
 import com.olfourd.timesheet.dao.TrackRepository;
 import com.olfourd.timesheet.dao.model.Project;

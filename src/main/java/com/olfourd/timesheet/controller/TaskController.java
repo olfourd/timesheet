@@ -1,7 +1,7 @@
 package com.olfourd.timesheet.controller;
 
-import com.olfourd.timesheet.controller.dto.track.AddTaskRequest;
-import com.olfourd.timesheet.controller.dto.track.UpdateTaskRequest;
+import com.olfourd.timesheet.controller.dto.task.AddTaskRequest;
+import com.olfourd.timesheet.controller.dto.task.UpdateTaskRequest;
 import com.olfourd.timesheet.dao.ProjectRepository;
 import com.olfourd.timesheet.dao.TaskRepository;
 import com.olfourd.timesheet.dao.model.Project;

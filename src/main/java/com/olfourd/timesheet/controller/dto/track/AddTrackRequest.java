@@ -1,4 +1,4 @@
-package com.olfourd.timesheet.controller.dto;
+package com.olfourd.timesheet.controller.dto.track;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
