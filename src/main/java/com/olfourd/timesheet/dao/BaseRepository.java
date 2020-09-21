@@ -2,7 +2,9 @@ package com.olfourd.timesheet.dao;
 
 import com.olfourd.timesheet.exception.EntityNotFoundException;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.NoRepositoryBean;
 
+@NoRepositoryBean
 public interface BaseRepository<T, ID> extends MongoRepository<T, ID> {
 
     default T findByIdMandatory(ID id) {

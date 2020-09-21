@@ -38,4 +38,8 @@ public class Task {
      * Трекинг
      */
     private List<Track> tracks;
+    /**
+     * Флаг завершённости задачи
+     */
+    private Boolean done;
 }

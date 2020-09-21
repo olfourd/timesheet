@@ -2,18 +2,17 @@ package com.olfourd.timesheet.controller;
 
 import com.olfourd.timesheet.dao.ProjectRepository;
 import com.olfourd.timesheet.dao.model.Project;
-import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-@ApiModel("Project api")
+@Api("Project api")
 @RestController
 @RequestMapping("project")
 @RequiredArgsConstructor
